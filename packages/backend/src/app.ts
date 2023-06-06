@@ -2,6 +2,8 @@ import express from 'express';
 import history from 'connect-history-api-fallback';
 import path from 'path';
 import setupRoutes from '@/setupRoutes';
+import attachUser from '@/middleware/application/attachUser';
+import errorMiddleware from '@/middleware/application/error';
 
 const app = express();
 
@@ -27,7 +29,11 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+app.use(attachUser);
+
 setupRoutes(app);
+
+app.use(errorMiddleware);
 
 app.use(history());
 

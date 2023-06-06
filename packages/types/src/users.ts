@@ -4,6 +4,7 @@ export interface User {
   lastName: string;
   email: string;
   isAdmin: boolean;
+  createdOn: Date;
 }
 
 export interface UpdateProfilePayload {

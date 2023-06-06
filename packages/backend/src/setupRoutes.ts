@@ -1,8 +1,10 @@
 import { Express } from 'express';
-import helloWorld from '@/api/hello_world';
+import register from '@/api/register';
+import users from '@/api/users';
+import profile from '@/api/profile';
 
 export const API_PATH = '/api';
 
 export default (app: Express) => {
-  [helloWorld].forEach((route) => app.use(API_PATH, route));
+  [register, users, profile].forEach((route) => app.use(API_PATH, route));
 };
