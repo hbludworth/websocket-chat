@@ -9,7 +9,11 @@
     ]
   },
   "scripts": {
-    "start": "yarn server",
-    "server": "yarn workspace backend dev"
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "server": "yarn workspace backend dev",
+    "client": "yarn workspace frontend dev"
+  },
+  "dependencies": {
+    "concurrently": "^8.1.0"
   }
 }
