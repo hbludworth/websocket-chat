@@ -23,6 +23,9 @@ export default {
     state.idToken = null;
   },
   getters: {
+    get isAdmin() {
+      return state.user ? state.user.isAdmin : false;
+    },
     get isAuthenticated() {
       return !!state.user;
     },

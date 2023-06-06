@@ -24,10 +24,12 @@ firebase.auth().onAuthStateChanged(async (user) => {
       console.error('Error initializing site', err);
     }
   }
+
+  if (!app) {
+    app = createApp(App);
+
+    app.use(router);
+
+    app.mount('#app');
+  }
 });
-
-app = createApp(App);
-
-app.use(router);
-
-app.mount('#app');
