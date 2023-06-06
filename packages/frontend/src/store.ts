@@ -1,13 +1,5 @@
 import { reactive } from 'vue';
-
-// FIXME will move to a shared types package
-export interface User {
-  uuid: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  isAdmin: boolean;
-}
+import { type User } from 'types';
 
 export interface State {
   user: User | null;

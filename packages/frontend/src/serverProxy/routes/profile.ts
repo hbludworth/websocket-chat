@@ -1,14 +1,14 @@
 import axios from '@/axiosInstance';
 import firebase from '@/firebase';
 import store from '@/store';
+import { type UpdateProfilePayload } from 'types';
 
 const updateProfile = async (
   firstName?: string,
   lastName?: string,
   email?: string
 ): Promise<void> => {
-  // FIXME add type
-  const payload = {
+  const payload: UpdateProfilePayload = {
     firstName,
     lastName,
     email,

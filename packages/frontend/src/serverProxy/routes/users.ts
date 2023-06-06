@@ -1,4 +1,4 @@
-import { type User } from '@/store';
+import { type User } from 'types';
 import axios from '@/axiosInstance';
 
 async function getUser(uuid: string): Promise<User> {
