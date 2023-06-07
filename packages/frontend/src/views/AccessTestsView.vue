@@ -67,7 +67,12 @@ const testNonExistentRoute = async () => {
           </h1>
           <h2 class="subtitle">
             These simple tests allow you to see how the application behaves
-            depending on the user's authentication status and admin status.
+            depending on the current user's authentication and admin status.
+          </h2>
+
+          <h2 class="subtitle">
+            Logging in, logging out, and changing admin status will affect the
+            results.
           </h2>
 
           <div class="columns mt-5 is-centered">

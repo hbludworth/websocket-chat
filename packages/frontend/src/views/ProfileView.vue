@@ -119,6 +119,12 @@ const confirmPassword = async () => {
             >
               Go Home
             </RouterLink>
+            <RouterLink
+              to="/tests"
+              class="button is-primary is-outlined is-rounded mt-5 mx-2"
+            >
+              Access Tests
+            </RouterLink>
           </div>
 
           <div v-else>
