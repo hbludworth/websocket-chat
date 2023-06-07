@@ -23,7 +23,9 @@ const testAuthenticatedRoute = async () => {
     authenticatedRouteMessage.value = '200 - OK';
     authenticatedRouteStatus.value = true;
   } catch (status) {
-    authenticatedRouteMessage.value = `${status} - Unauthorized`;
+    authenticatedRouteMessage.value = `${status} - ${
+      status === 401 ? 'Unauthorized' : 'Forbidden'
+    }`;
     authenticatedRouteStatus.value = false;
   }
 };

@@ -5,7 +5,7 @@ const unauthenticatedGuard: NavigationGuard = (_to, _from, next) => {
   if (!store.getters.isAuthenticated) {
     next();
   } else {
-    next('/401');
+    next('/401_unauthenticated');
   }
 };
 

@@ -70,6 +70,11 @@ const router = createRouter({
       component: () => import('../views/401View.vue'),
     },
     {
+      path: '/401_unauthenticated',
+      name: '401_unauthenticated',
+      component: () => import('../views/401UnauthenticatedView.vue'),
+    },
+    {
       path: '/403',
       name: '403',
       component: () => import('../views/403View.vue'),
