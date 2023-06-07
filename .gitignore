@@ -133,6 +133,7 @@ dist
 build
 dist
 .vscode
+build.zip
 
 #Vue
 # Logs
