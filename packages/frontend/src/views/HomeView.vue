@@ -61,12 +61,12 @@ const currentUser = computed(() => store.getters.user);
             <RouterLink
               class="button is-primary is-outlined is-rounded mx-2"
               to="/profile"
-              >Edit User Profile</RouterLink
+              >Edit Profile</RouterLink
             >
             <RouterLink
               class="button is-primary is-outlined is-rounded mx-2"
               to="/tests"
-              >Run Access Tests</RouterLink
+              >Access Tests</RouterLink
             >
           </div>
         </div>

@@ -18,8 +18,10 @@
 
       <div class="navbar-menu" :class="{ 'is-active': menuIsActive }">
         <div class="navbar-end">
-          <RouterLink class="navbar-item" to="/profile">Profile</RouterLink>
-          <RouterLink class="navbar-item" to="/tests">Tests</RouterLink>
+          <RouterLink v-if="isAuthenticated" class="navbar-item" to="/profile"
+            >Profile</RouterLink
+          >
+          <RouterLink class="navbar-item" to="/tests">Access Tests</RouterLink>
           <div
             v-if="isAuthenticated"
             class="nav-bar-item is-flex is-align-items-center ml-2"

@@ -1,6 +1,7 @@
 import axios from 'axios';
-import store from './store';
-import firebase from './firebase';
+import store from '@/store';
+import firebase from '@/firebase';
+import router from '@/router';
 
 const host =
   process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : '';
@@ -27,11 +28,7 @@ axiosInstance.interceptors.response.use(
       return axiosInstance(error.config);
     }
 
-    // FIXME add error routing
-
-    return Promise.reject(
-      new Error(error.response?.data?.message || undefined)
-    );
+    return Promise.reject(new Error(error.response.status));
   }
 );
 
