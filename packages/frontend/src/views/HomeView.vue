@@ -87,7 +87,7 @@ const currentUser = computed(() => store.getters.user);
           <h2 class="subtitle mt-2">
             I hope you find this template useful. The source code is available
             on GitHub at the link in the footer. If you have any questions, feel
-            free to reach out via email.
+            free to reach out via email using the link below.
           </h2>
 
           <div class="mt-6">
