@@ -2,11 +2,16 @@ import './assets/main.scss';
 import firebase from './firebase';
 import { createApp, type App as AppType } from 'vue';
 import App from './App.vue';
+import LoadingScreen from './LoadingScreen.vue';
 import router from './router';
 import store from './store';
 import serverProxy from './serverProxy';
 
 let app: AppType<Element>;
+let appLoaded = false;
+
+app = createApp(LoadingScreen);
+app.mount('#app');
 
 firebase.auth().onAuthStateChanged(async (user) => {
   const { currentUser } = firebase.auth();
@@ -25,11 +30,11 @@ firebase.auth().onAuthStateChanged(async (user) => {
     }
   }
 
-  if (!app) {
+  if (!appLoaded) {
+    appLoaded = true;
+
     app = createApp(App);
-
     app.use(router);
-
     app.mount('#app');
   }
 });
