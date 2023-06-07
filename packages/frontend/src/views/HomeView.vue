@@ -19,23 +19,23 @@ const currentUser = computed(() => store.getters.user);
             Welcome, {{ currentUser ? currentUser.firstName : 'Guest' }}!
           </h1>
           <ul>
-            <li v-if="currentUser" class="is-size-4-tablet">
+            <li v-if="currentUser" class="is-size-5-tablet">
               <b>Full Name:</b>
               <span class="ml-1"
                 >{{ currentUser.firstName }} {{ currentUser.lastName }}</span
               >
             </li>
-            <li v-if="currentUser" class="is-size-4-tablet">
+            <li v-if="currentUser" class="is-size-5-tablet">
               <b>Email:</b>
               <span class="ml-1">{{ currentUser.email }}</span>
             </li>
-            <li v-if="currentUser" class="is-size-4-tablet">
+            <li v-if="currentUser" class="is-size-5-tablet">
               <b>Created:</b>
               <span class="ml-1">{{
                 new Date(currentUser.createdOn).toLocaleString()
               }}</span>
             </li>
-            <li class="is-size-4-tablet">
+            <li class="is-size-5-tablet">
               <b>Authenticated:</b>
               <span class="icon ml-2">
                 <i
@@ -45,7 +45,7 @@ const currentUser = computed(() => store.getters.user);
                 <i v-else class="mdi mdi-close-circle has-text-danger"></i>
               </span>
             </li>
-            <li class="is-size-4-tablet">
+            <li class="is-size-5-tablet">
               <b>Admin:</b>
               <span class="icon ml-2">
                 <i
@@ -57,21 +57,17 @@ const currentUser = computed(() => store.getters.user);
             </li>
           </ul>
 
-          <div class="columns mt-5 is-centered">
-            <div v-if="isAuthenticated" class="column is-one-quarter">
-              <RouterLink
-                class="button is-primary is-outlined is-rounded"
-                to="/profile"
-                >Edit User Profile</RouterLink
-              >
-            </div>
-            <div class="column is-one-quarter">
-              <RouterLink
-                class="button is-primary is-outlined is-rounded"
-                to="/tests"
-                >Run Access Tests</RouterLink
-              >
-            </div>
+          <div class="mt-5">
+            <RouterLink
+              class="button is-primary is-outlined is-rounded mx-2"
+              to="/profile"
+              >Edit User Profile</RouterLink
+            >
+            <RouterLink
+              class="button is-primary is-outlined is-rounded mx-2"
+              to="/tests"
+              >Run Access Tests</RouterLink
+            >
           </div>
         </div>
       </div>
