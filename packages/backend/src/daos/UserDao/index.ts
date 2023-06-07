@@ -38,11 +38,14 @@ class UserDao {
 
   async updateProfile(
     uuid: string,
-    { email, firstName, lastName, isAdmin }: Required<UpdateProfilePayload>
+    firstName: string,
+    lastName: string,
+    email: string,
+    isAdmin: boolean
   ): Promise<void> {
     await mongodb
       .collection<User>('user')
-      .updateOne({ uuid }, { $set: { email, firstName, lastName, isAdmin } });
+      .updateOne({ uuid }, { $set: { firstName, lastName, email, isAdmin } });
   }
 }
 

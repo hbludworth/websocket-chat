@@ -8,8 +8,8 @@ export interface User {
 }
 
 export interface UpdateProfilePayload {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   isAdmin: boolean;
 }

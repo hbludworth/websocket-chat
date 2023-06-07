@@ -10,15 +10,16 @@ router.route('/profile').patch(authenticatedRoute, async (req, res, next) => {
   try {
     const UserDao = sl.get('UserDao');
 
-    const { uuid, email, firstName, lastName } = req.user!;
-    const updatedProfile: UpdateProfilePayload = req.body;
+    const { uuid } = req.user!;
+    const payload: UpdateProfilePayload = req.body;
 
-    await UserDao.updateProfile(uuid, {
-      email: updatedProfile.email || email,
-      firstName: updatedProfile.firstName || firstName,
-      lastName: updatedProfile.lastName || lastName,
-      isAdmin: updatedProfile.isAdmin,
-    });
+    await UserDao.updateProfile(
+      uuid,
+      payload.firstName,
+      payload.lastName,
+      payload.email,
+      payload.isAdmin
+    );
 
     res.status(204).end();
   } catch (err) {

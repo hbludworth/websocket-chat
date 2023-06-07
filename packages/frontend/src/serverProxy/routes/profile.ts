@@ -4,10 +4,10 @@ import store from '@/store';
 import { type UpdateProfilePayload } from 'types';
 
 const updateProfile = async (
-  isAdmin: boolean,
-  firstName?: string,
-  lastName?: string,
-  email?: string
+  firstName: string,
+  lastName: string,
+  email: string,
+  isAdmin: boolean
 ): Promise<void> => {
   const payload: UpdateProfilePayload = {
     firstName,
@@ -21,38 +21,17 @@ const updateProfile = async (
   const { currentUser } = firebase.auth();
 
   if (currentUser && store.getters.user) {
-    if (payload.firstName || payload.lastName) {
-      await currentUser.updateProfile({
-        displayName: `${payload.firstName || store.getters.user.firstName} ${
-          payload.lastName || store.getters.user.lastName
-        }`,
-      });
-    }
+    await currentUser.updateProfile({
+      displayName: `${payload.firstName} ${payload.lastName}`,
+    });
 
-    if (payload.email) {
-      await currentUser.updateEmail(payload.email);
-      store.setUser({
-        ...store.getters.user,
-        email: payload.email,
-      });
-    }
-
-    if (payload.firstName) {
-      store.setUser({
-        ...store.getters.user,
-        firstName: payload.firstName,
-      });
-    }
-
-    if (payload.lastName) {
-      store.setUser({
-        ...store.getters.user,
-        lastName: payload.lastName,
-      });
-    }
+    await currentUser.updateEmail(payload.email);
 
     store.setUser({
       ...store.getters.user,
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      email: payload.email,
       isAdmin: payload.isAdmin,
     });
   }
