@@ -21,15 +21,19 @@
           <RouterLink v-if="isAuthenticated" class="navbar-item" to="/profile"
             >Profile</RouterLink
           >
-          <RouterLink class="navbar-item" to="/tests">Access Tests</RouterLink>
+          <RouterLink class="navbar-item" to="/tests">Tests</RouterLink>
           <div
             v-if="isAuthenticated"
-            class="nav-bar-item is-flex is-align-items-center ml-2"
+            class="nav-bar-item is-flex is-align-items-center ml-4"
           >
-            <a @click="logout" class="button is-outlined is-rounded">Log Out</a>
+            <a
+              @click="logout"
+              class="button is-outlined is-rounded has-text-primary"
+              >Log Out</a
+            >
           </div>
           <RouterLink v-else class="navbar-item" to="/login">
-            <a class="button is-outlined is-rounded">Log In</a>
+            <a class="button is-outlined is-rounded has-text-primary">Log In</a>
           </RouterLink>
         </div>
       </div>

@@ -75,7 +75,7 @@ const testNonExistentRoute = async () => {
             results.
           </h2>
 
-          <div class="columns mt-5 is-centered">
+          <div class="columns mt-6 is-centered">
             <div
               class="column is-one-third is-flex is-align-items-center is-justify-content-center"
             >
