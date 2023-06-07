@@ -4,6 +4,7 @@ import store from '@/store';
 import { type UpdateProfilePayload } from 'types';
 
 const updateProfile = async (
+  isAdmin: boolean,
   firstName?: string,
   lastName?: string,
   email?: string
@@ -12,6 +13,7 @@ const updateProfile = async (
     firstName,
     lastName,
     email,
+    isAdmin,
   };
 
   await axios.patch('/profile', payload);
@@ -48,6 +50,11 @@ const updateProfile = async (
         lastName: payload.lastName,
       });
     }
+
+    store.setUser({
+      ...store.getters.user,
+      isAdmin: payload.isAdmin,
+    });
   }
 };
 

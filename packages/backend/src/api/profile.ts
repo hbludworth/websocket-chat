@@ -17,6 +17,7 @@ router.route('/profile').patch(authenticatedRoute, async (req, res, next) => {
       email: updatedProfile.email || email,
       firstName: updatedProfile.firstName || firstName,
       lastName: updatedProfile.lastName || lastName,
+      isAdmin: updatedProfile.isAdmin,
     });
 
     res.status(204).end();
