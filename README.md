@@ -36,6 +36,6 @@ Should you wish to build the project and deploy to production, the process is ex
 
 First, run `yarn build` to build the TypeScript types, the Vue app, and the Node.js server files.
 
-Next, run `yarn zip`. This will create a zip file containing all of the code necessary to run in production, including all necessary node modules.
+Next, run `yarn zip`. This will create a `build.zip` file at the root directory containing all of the code necessary to run in production, including all necessary node modules.
 
-Simply deploy the zip file to your hosting provider of choice and you should see the production version of the app.
+Simply deploy the `build.zip` file to your hosting provider of choice and you should see the production version of the app.
