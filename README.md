@@ -1,4 +1,4 @@
-# Firebase Authentication Template
+# Firebase Authentication Example
 
 This repository is home to a simple template for adding Firebase Authentication to your own projects. It is a fullstack app built with Vue, Node.js, Express, MongoDB, and TypeScript.
 
