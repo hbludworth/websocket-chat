@@ -6,14 +6,12 @@ import { type UpdateProfilePayload } from 'types';
 const updateProfile = async (
   firstName: string,
   lastName: string,
-  email: string,
-  isAdmin: boolean
+  email: string
 ): Promise<void> => {
   const payload: UpdateProfilePayload = {
     firstName,
     lastName,
     email,
-    isAdmin,
   };
 
   await axios.patch('/profile', payload);
@@ -32,7 +30,6 @@ const updateProfile = async (
       firstName: payload.firstName,
       lastName: payload.lastName,
       email: payload.email,
-      isAdmin: payload.isAdmin,
     });
   }
 };

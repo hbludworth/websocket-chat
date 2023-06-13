@@ -17,10 +17,7 @@ const errorMiddleware = async (
 
   res.status(status).json({
     status,
-    message:
-      status < 500 || (req.user && req.user.isAdmin)
-        ? `${status} Error: ${message}`
-        : `${status} Internal Error`,
+    message: `${status} Error: ${message}`,
   });
 };
 

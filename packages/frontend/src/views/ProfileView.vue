@@ -9,7 +9,6 @@ const currentUser = computed(() => store.getters.user);
 const firstName = ref(currentUser.value?.firstName || '');
 const lastName = ref(currentUser.value?.lastName || '');
 const email = ref(currentUser.value?.email || '');
-const adminStatus = ref(currentUser.value?.isAdmin || false);
 
 const cancel = () => {
   router.push('/');
@@ -33,10 +32,6 @@ const saveEnabled = computed(() => {
   }
 
   if (email.value !== currentUser.value?.email) {
-    return true;
-  }
-
-  if (adminStatus.value !== currentUser.value?.isAdmin) {
     return true;
   }
 
@@ -67,8 +62,7 @@ const confirmPassword = async () => {
     await serverProxy.updateProfile(
       firstName.value,
       lastName.value,
-      email.value,
-      adminStatus.value
+      email.value
     );
     updatedSuccessfully.value = true;
     verificationDialog.value = false;
@@ -119,12 +113,6 @@ const confirmPassword = async () => {
             >
               Go Home
             </RouterLink>
-            <RouterLink
-              to="/tests"
-              class="button is-primary is-outlined is-rounded mt-5 mx-2"
-            >
-              Access Tests
-            </RouterLink>
           </div>
 
           <div v-else>
@@ -171,18 +159,6 @@ const confirmPassword = async () => {
                 <div v-if="emailValidationError" class="mt-2 has-text-danger">
                   {{ emailValidationError }}
                 </div>
-              </div>
-            </div>
-
-            <div class="columns is-centered">
-              <div class="column is-one-fifth is-flex is-align-items-center">
-                <b>Admin</b>
-              </div>
-              <div class="column is-half is-flex is-align-items-center">
-                <label class="checkbox">
-                  <input type="checkbox" v-model="adminStatus" />
-                  <span class="ml-2">{{ adminStatus ? 'True' : 'False' }}</span>
-                </label>
               </div>
             </div>
 

@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import authenticatedGuard from '@/guards/authenticatedGuard';
 import unauthenticatedGuard from '@/guards/unauthenticatedGuard';
-import adminGuard from '@/guards/adminGuard';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,28 +40,6 @@ const router = createRouter({
       name: 'profile',
       component: () => import('../views/ProfileView.vue'),
       beforeEnter: authenticatedGuard,
-    },
-    {
-      path: '/tests',
-      name: 'tests',
-      component: () => import('../views/AccessTestsView.vue'),
-    },
-    {
-      path: '/tests/open',
-      name: 'open',
-      component: () => import('../views/tests/OpenTestView.vue'),
-    },
-    {
-      path: '/tests/auth',
-      name: 'tests_auth',
-      component: () => import('../views/tests/AuthTestView.vue'),
-      beforeEnter: authenticatedGuard,
-    },
-    {
-      path: '/tests/admin',
-      name: 'tests_admin',
-      component: () => import('../views/tests/AdminTestView.vue'),
-      beforeEnter: adminGuard,
     },
     {
       path: '/401',

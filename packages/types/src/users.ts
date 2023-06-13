@@ -3,7 +3,6 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  isAdmin: boolean;
   createdOn: Date;
 }
 
@@ -11,5 +10,4 @@ export interface UpdateProfilePayload {
   firstName: string;
   lastName: string;
   email: string;
-  isAdmin: boolean;
 }

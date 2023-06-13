@@ -29,7 +29,6 @@ class UserDao {
       firstName,
       lastName,
       email,
-      isAdmin: false,
       createdOn: new Date(),
     };
 
@@ -40,12 +39,11 @@ class UserDao {
     uuid: string,
     firstName: string,
     lastName: string,
-    email: string,
-    isAdmin: boolean
+    email: string
   ): Promise<void> {
     await mongodb
       .collection<User>('user')
-      .updateOne({ uuid }, { $set: { firstName, lastName, email, isAdmin } });
+      .updateOne({ uuid }, { $set: { firstName, lastName, email } });
   }
 }
 

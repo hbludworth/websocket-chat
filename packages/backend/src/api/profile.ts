@@ -17,8 +17,7 @@ router.route('/profile').patch(authenticatedRoute, async (req, res, next) => {
       uuid,
       payload.firstName,
       payload.lastName,
-      payload.email,
-      payload.isAdmin
+      payload.email
     );
 
     res.status(204).end();

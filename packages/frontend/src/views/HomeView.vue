@@ -4,7 +4,6 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 
 const isAuthenticated = computed(() => store.getters.isAuthenticated);
-const isAdmin = computed(() => store.getters.isAdmin);
 const currentUser = computed(() => store.getters.user);
 </script>
 
@@ -40,16 +39,6 @@ const currentUser = computed(() => store.getters.user);
               <span class="icon ml-2">
                 <i
                   v-if="isAuthenticated"
-                  class="mdi mdi-check-circle has-text-success"
-                ></i>
-                <i v-else class="mdi mdi-close-circle has-text-danger"></i>
-              </span>
-            </li>
-            <li class="is-size-5-tablet">
-              <b>Admin:</b>
-              <span class="icon ml-2">
-                <i
-                  v-if="isAdmin"
                   class="mdi mdi-check-circle has-text-success"
                 ></i>
                 <i v-else class="mdi mdi-close-circle has-text-danger"></i>
@@ -96,11 +85,6 @@ const currentUser = computed(() => store.getters.user);
               class="button is-primary is-outlined is-rounded mx-2"
               to="/profile"
               >Edit Profile</RouterLink
-            >
-            <RouterLink
-              class="button is-primary is-outlined is-rounded mx-2"
-              to="/tests"
-              >Access Tests</RouterLink
             >
           </div>
         </div>

@@ -13,7 +13,7 @@ router.route('/users/:uuid').get(authenticatedRoute, async (req, res, next) => {
 
     const user = await UserDao.getUserByUuid(uuid);
 
-    if (!req.user!.isAdmin && uuid !== req.user!.uuid) {
+    if (uuid !== req.user!.uuid) {
       next(
         new HttpForbidden(
           `You do not have permission to retrieve information for user with UUID ${uuid}`
