@@ -5,7 +5,7 @@ export function initializeFirebase(cb: (err?: any) => void) {
   const s3 = new AWS.S3();
   s3.getObject(
     {
-      Bucket: 'firebase-template',
+      Bucket: 'hb-websocket-chat',
       Key: 'firebase_credentials.json',
     },
     (err, data) => {

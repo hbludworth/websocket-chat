@@ -2,12 +2,12 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCq164R5bmwFnpgdYYXAQx8JWVEM-eU1-Y',
-  authDomain: 'hb-firebase-template.firebaseapp.com',
-  projectId: 'hb-firebase-template',
-  storageBucket: 'hb-firebase-template.appspot.com',
-  messagingSenderId: '817951649771',
-  appId: '1:817951649771:web:c6e480650401f33ab933ae',
+  apiKey: 'AIzaSyDD6vAJnvb6t2Of4qKjJ8cM43KCXSWlh14',
+  authDomain: 'hb-websocket-chat.firebaseapp.com',
+  projectId: 'hb-websocket-chat',
+  storageBucket: 'hb-websocket-chat.appspot.com',
+  messagingSenderId: '582939464507',
+  appId: '1:582939464507:web:e96e696b8b39b194ed9d1e',
 };
 
 firebase.initializeApp(firebaseConfig);
