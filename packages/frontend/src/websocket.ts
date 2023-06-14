@@ -8,27 +8,33 @@ const createWebsocket = () => {
 
   let socket: WebSocket;
 
+  let numAttempts = 0;
+
   const resetSocket = () => {
+    numAttempts += 1;
     if (socket && socket.readyState === socket.OPEN) {
       return;
     }
 
-    console.log('Reconnecting...');
+    if (numAttempts > 5) {
+      clearInterval(interval);
+      return;
+    }
+
     socket = new WebSocket(`${socketProtocol}://${socketHost}/${token}`);
 
-    socket.onclose = () => {
-      console.log('Connection closed');
-      setInterval(resetSocket, 1000);
-    };
-
     socket.onopen = () => {
-      console.log('Connection opened');
+      numAttempts = 0;
       clearInterval(interval);
       store.setSocket(socket);
+
+      socket.onclose = () => {
+        interval = setInterval(resetSocket, 1000);
+      };
     };
   };
 
-  const interval = setInterval(resetSocket, 1000);
+  let interval = setInterval(resetSocket, 1000);
 };
 
 export default createWebsocket;
