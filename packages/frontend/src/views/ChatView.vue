@@ -22,7 +22,7 @@ onMounted(async () => {
 
 const setupSocketListener = () => {
   socket.value!.onmessage = async (event) => {
-    const message: WebSocketPayload = JSON.parse(await event.data.text());
+    const message: WebSocketPayload = JSON.parse(await event.data);
 
     switch (message.type) {
       case 'newThread': {

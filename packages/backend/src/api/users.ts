@@ -22,11 +22,6 @@ router.route('/users/:uuid').get(authenticatedRoute, async (req, res, next) => {
       return;
     }
 
-    if (!user) {
-      next(new HttpBadRequest(`There is no user with UUID ${uuid}`));
-      return;
-    }
-
     res.json(user);
   } catch (err) {
     next(new HttpInternalError(err as string));

@@ -5,3 +5,8 @@ export interface Message {
   content: string;
   createdOn: Date;
 }
+
+export interface CreateMessagePayload {
+  threadUuid: string;
+  message: string;
+}

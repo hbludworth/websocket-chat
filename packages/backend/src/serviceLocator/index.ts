@@ -1,6 +1,7 @@
 import UserDao from '@/daos/UserDao';
 import ThreadDao from '@/daos/ThreadDao';
 import MessageDao from '@/daos/MessageDao';
+import WebSocketStarter from '@/websocket';
 
 const instances: { [key: string]: any } = {};
 
@@ -8,6 +9,7 @@ export type ServiceTypes = {
   UserDao: typeof UserDao;
   ThreadDao: typeof ThreadDao;
   MessageDao: typeof MessageDao;
+  WebSocket: WebSocketStarter;
 };
 
 export default {

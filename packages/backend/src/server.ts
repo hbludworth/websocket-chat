@@ -6,12 +6,8 @@ import sl from '@/serviceLocator';
 import WebSocketStarter from '@/websocket';
 
 import UserDao from '@/daos/UserDao';
-import ThreadDao from './daos/ThreadDao';
-import MessageDao from './daos/MessageDao';
-
-sl.set('UserDao', UserDao);
-sl.set('ThreadDao', ThreadDao);
-sl.set('MessageDao', MessageDao);
+import ThreadDao from '@/daos/ThreadDao';
+import MessageDao from '@/daos/MessageDao';
 
 declare global {
   namespace Express {
@@ -29,6 +25,11 @@ initializeFirebase((err) => {
       console.log('Listening on port 8081'); // eslint-disable-line no-console
     });
 
-    new WebSocketStarter(httpServer);
+    const WebSocket = new WebSocketStarter(httpServer);
+
+    sl.set('UserDao', UserDao);
+    sl.set('ThreadDao', ThreadDao);
+    sl.set('MessageDao', MessageDao);
+    sl.set('WebSocket', WebSocket);
   }
 });

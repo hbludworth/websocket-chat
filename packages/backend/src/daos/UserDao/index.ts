@@ -2,10 +2,14 @@ import { User } from 'types';
 import mongodb from '@/connection';
 
 class UserDao {
-  async getUserByUuid(uuid: string): Promise<User | null> {
+  async getUserByUuid(uuid: string): Promise<User> {
     const user: User | null = await mongodb
       .collection<User>('user')
       .findOne({ uuid });
+
+    if (!user) {
+      throw new Error(`User with uuid ${uuid} not found`);
+    }
 
     return user;
   }

@@ -1,5 +1,6 @@
 import { Message } from 'types';
 import mongodb from '@/connection';
+import { v4 } from 'uuid';
 
 class MessageDao {
   public async getMessagesByThreadUuid(threadUuid: string): Promise<Message[]> {
@@ -15,18 +16,16 @@ class MessageDao {
   }
 
   public async createMessage(
-    uuid: string,
     threadUuid: string,
     userUuid: string,
-    content: string,
-    createdOn: Date
+    content: string
   ): Promise<Message> {
     const message: Message = {
-      uuid,
+      uuid: v4(),
       threadUuid,
       userUuid,
       content,
-      createdOn,
+      createdOn: new Date(),
     };
 
     await mongodb.collection<Message>('message').insertOne(message);

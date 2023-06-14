@@ -1,34 +1,9 @@
 import { Thread, ThreadRow } from 'types';
 import mongodb from '@/connection';
 import sl from '@/serviceLocator';
+import { v4 } from 'uuid';
 
 class ThreadDao {
-  private async getThreadRowByUuid(uuid: string): Promise<ThreadRow | null> {
-    const thread: ThreadRow | null = await mongodb
-      .collection<ThreadRow>('thread')
-      .findOne({ uuid });
-
-    return thread;
-  }
-
-  private async getThreadByUuid(uuid: string): Promise<Thread | null> {
-    const MessageDao = sl.get('MessageDao');
-
-    const threadRow = await this.getThreadRowByUuid(uuid);
-    if (!threadRow) {
-      return null;
-    }
-
-    const messages = await MessageDao.getMessagesByThreadUuid(uuid);
-
-    const thread: Thread = {
-      ...threadRow,
-      messages,
-    };
-
-    return thread;
-  }
-
   private async getThreadRowsOfUser(userUuid: string): Promise<ThreadRow[]> {
     const rows: ThreadRow[] = await mongodb
       .collection<ThreadRow>('thread')
@@ -39,29 +14,46 @@ class ThreadDao {
   }
 
   public async getThreadsOfUser(userUuid: string): Promise<Thread[]> {
-    const rows = await this.getThreadRowsOfUser(userUuid);
+    const MessageDao = sl.get('MessageDao');
+    const UserDao = sl.get('UserDao');
 
-    const threads: Thread[] = (
-      await Promise.all(rows.map((row) => this.getThreadByUuid(row.uuid)))
-    ).filter((thread): thread is Thread => !!thread);
+    const threadRows = await this.getThreadRowsOfUser(userUuid);
+
+    const messages = await Promise.all(
+      threadRows.map((row) => MessageDao.getMessagesByThreadUuid(row.uuid))
+    );
+
+    const users1 = await Promise.all(
+      threadRows.map((row) => UserDao.getUserByUuid(row.userUuid1))
+    );
+
+    const users2 = await Promise.all(
+      threadRows.map((row) => UserDao.getUserByUuid(row.userUuid2))
+    );
+
+    const threads: Thread[] = threadRows.map((row, idx) => ({
+      ...row,
+      messages: messages[idx],
+      user1: users1[idx],
+      user2: users2[idx],
+    }));
 
     return threads;
   }
 
   public async createThread(
-    uuid: string,
     userUuid1: string,
     userUuid2: string
   ): Promise<ThreadRow> {
-    const thread: ThreadRow = {
-      uuid,
+    const threadRow: ThreadRow = {
+      uuid: v4(),
       userUuid1,
       userUuid2,
     };
 
-    await mongodb.collection<ThreadRow>('thread').insertOne(thread);
+    await mongodb.collection<ThreadRow>('thread').insertOne(threadRow);
 
-    return thread;
+    return threadRow;
   }
 
   public async getUsersOfThread(threadUuid: string): Promise<string[]> {

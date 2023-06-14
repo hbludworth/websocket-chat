@@ -36,10 +36,6 @@ router.route('/register').post(async (req, res, next) => {
     await UserDao.createUser(uuid, firstName, lastName, email);
 
     const user = await UserDao.getUserByUuid(uuid);
-    if (!user) {
-      next(new HttpInternalError('Error creating user'));
-      return;
-    }
 
     req.user = user;
 

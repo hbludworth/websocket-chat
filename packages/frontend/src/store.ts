@@ -26,6 +26,7 @@ export default {
   logout: () => {
     state.user = null;
     state.idToken = null;
+    state.socket?.close();
     state.socket = null;
   },
   getters: {
