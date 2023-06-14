@@ -1,14 +1,14 @@
-import { Message } from './messages';
-import { Thread } from './threads';
+import { type Message } from './messages';
+import { type Thread } from './threads';
 
 export type WebSocketPayload = NewThreadPayload | NewMessagePayload;
 
 export interface NewThreadPayload {
-  type: 'newThread';
+  type: 'NEW_THREAD';
   body: Thread;
 }
 
 export interface NewMessagePayload {
-  type: 'newMessage';
+  type: 'NEW_MESSAGE';
   body: Message;
 }

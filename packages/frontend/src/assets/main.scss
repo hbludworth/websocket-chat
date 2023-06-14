@@ -6,9 +6,47 @@ $primary: #148f77;
 $link: $primary;
 $navbar-item-hover-color: $primary;
 $progress-indeterminate-duration: 0.9s;
+$box-shadow: none;
 
 @import '../../../../node_modules/bulma/bulma.sass';
 
 * {
   font-family: 'Instrument Sans', sans-serif;
+}
+
+.thread-box {
+  border: 0.5px solid $primary;
+  cursor: pointer;
+}
+
+.chat-main {
+  min-height: 85vh;
+}
+
+.comment-box {
+  border: 0.5px solid $primary;
+  width: fit-content;
+}
+
+.messages-section {
+  height: 71vh;
+  overflow-y: scroll;
+  padding: 20px;
+  padding-right: 25px;
+  border: 0.5px solid $primary;
+  border-radius: 5px;
+}
+
+.mini-messages-section {
+  height: 30vh;
+  overflow-y: scroll;
+  padding: 20px;
+  border: 0.5px solid $primary;
+  border-radius: 5px;
+}
+
+.threads-section {
+  height: 71vh;
+  overflow-y: scroll;
+  padding-right: 5px;
 }

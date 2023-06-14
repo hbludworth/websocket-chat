@@ -53,7 +53,7 @@ router
       };
 
       WebSocket.sendToUser(recipientUserUuid, {
-        type: 'newThread',
+        type: 'NEW_THREAD',
         body: newThread,
       });
 

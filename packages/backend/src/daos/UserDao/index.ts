@@ -14,6 +14,18 @@ class UserDao {
     return user;
   }
 
+  async getUserByEmail(email: string): Promise<User> {
+    const user: User | null = await mongodb
+      .collection<User>('user')
+      .findOne({ email });
+
+    if (!user) {
+      throw new Error(`User with uuid ${email} not found`);
+    }
+
+    return user;
+  }
+
   async emailExists(email: string): Promise<boolean> {
     const user: User | null = await mongodb
       .collection<User>('user')

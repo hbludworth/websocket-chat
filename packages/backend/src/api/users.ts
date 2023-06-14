@@ -13,19 +13,26 @@ router.route('/users/:uuid').get(authenticatedRoute, async (req, res, next) => {
 
     const user = await UserDao.getUserByUuid(uuid);
 
-    if (uuid !== req.user!.uuid) {
-      next(
-        new HttpForbidden(
-          `You do not have permission to retrieve information for user with UUID ${uuid}`
-        )
-      );
-      return;
-    }
-
     res.json(user);
   } catch (err) {
     next(new HttpInternalError(err as string));
   }
 });
+
+router
+  .route('/users/email/:email')
+  .get(authenticatedRoute, async (req, res, next) => {
+    try {
+      const UserDao = sl.get('UserDao');
+
+      const { email } = req.params;
+
+      const user = await UserDao.getUserByEmail(email);
+
+      res.json(user);
+    } catch (err) {
+      next(new HttpInternalError(err as string));
+    }
+  });
 
 export default router;

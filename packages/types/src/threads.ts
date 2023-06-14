@@ -1,5 +1,5 @@
-import { Message } from './messages';
-import { User } from './users';
+import { type Message } from './messages';
+import { type User } from './users';
 
 export interface ThreadRow {
   uuid: string;

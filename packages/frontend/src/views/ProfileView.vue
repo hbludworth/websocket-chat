@@ -108,10 +108,10 @@ const confirmPassword = async () => {
               Go Back
             </button>
             <RouterLink
-              to="/"
+              to="/chats"
               class="button is-primary is-outlined is-rounded mt-5 mx-2"
             >
-              Go Home
+              Go To Chats
             </RouterLink>
           </div>
 
@@ -205,6 +205,7 @@ const confirmPassword = async () => {
                   class="input"
                   type="password"
                   placeholder="Password"
+                  @keydown.enter="confirmPassword"
                 />
               </div>
             </div>

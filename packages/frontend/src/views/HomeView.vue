@@ -35,6 +35,12 @@ const isAuthenticated = computed(() => store.getters.isAuthenticated);
               to="/chats"
               >Start Chatting</RouterLink
             >
+            <RouterLink
+              v-if="!isAuthenticated"
+              class="button is-primary is-outlined is-rounded mx-2"
+              to="/login"
+              >Log In</RouterLink
+            >
           </div>
         </div>
       </div>

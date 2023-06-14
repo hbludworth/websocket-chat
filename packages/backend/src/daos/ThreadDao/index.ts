@@ -38,7 +38,25 @@ class ThreadDao {
       user2: users2[idx],
     }));
 
-    return threads;
+    const sortedThreads = threads.sort((a, b) => {
+      if (a.messages.length === 0) {
+        return 1;
+      }
+
+      if (b.messages.length === 0) {
+        return -1;
+      }
+
+      const aLastMessage = a.messages[a.messages.length - 1];
+      const bLastMessage = b.messages[b.messages.length - 1];
+
+      return (
+        new Date(bLastMessage.createdOn).getTime() -
+        new Date(aLastMessage.createdOn).getTime()
+      );
+    });
+
+    return sortedThreads;
   }
 
   public async createThread(

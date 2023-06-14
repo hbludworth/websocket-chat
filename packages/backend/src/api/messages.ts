@@ -31,7 +31,7 @@ router.route('/messages').post(authenticatedRoute, async (req, res, next) => {
     }
 
     WebSocket.sendToUser(recipientUserUuid, {
-      type: 'newMessage',
+      type: 'NEW_MESSAGE',
       body: messageRow,
     });
 

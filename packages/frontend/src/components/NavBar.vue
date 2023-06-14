@@ -1,49 +1,44 @@
 <template>
-  <nav class="navbar is-primary" role="navigation">
-    <div class="container">
-      <div class="navbar-brand">
-        <RouterLink class="navbar-item" to="/">Home</RouterLink>
+  <nav class="navbar is-primary px-4" role="navigation">
+    <div class="navbar-brand">
+      <RouterLink class="navbar-item" to="/">Home</RouterLink>
 
-        <a
-          role="button"
-          class="navbar-burger"
-          :class="{ 'is-active': menuIsActive }"
-          @click="menuIsActive = !menuIsActive"
+      <a
+        role="button"
+        class="navbar-burger"
+        :class="{ 'is-active': menuIsActive }"
+        @click="menuIsActive = !menuIsActive"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" :class="{ 'is-active': menuIsActive }">
+      <div class="navbar-end">
+        <RouterLink v-if="isAuthenticated" class="navbar-item mx-2" to="/chats"
+          >Chats</RouterLink
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
-      </div>
-
-      <div class="navbar-menu" :class="{ 'is-active': menuIsActive }">
-        <div class="navbar-end">
-          <RouterLink
-            v-if="isAuthenticated"
-            class="navbar-item mx-2"
-            to="/chats"
-            >Chats</RouterLink
+        <RouterLink
+          v-if="isAuthenticated"
+          class="navbar-item mx-2"
+          to="/profile"
+          >Profile</RouterLink
+        >
+        <div
+          v-if="isAuthenticated"
+          class="nav-bar-item is-flex is-align-items-center ml-4"
+        >
+          <a
+            @click="logout"
+            class="button is-outlined is-rounded has-text-primary"
+            >Log Out</a
           >
-          <RouterLink
-            v-if="isAuthenticated"
-            class="navbar-item mx-2"
-            to="/profile"
-            >Profile</RouterLink
-          >
-          <div
-            v-if="isAuthenticated"
-            class="nav-bar-item is-flex is-align-items-center ml-4"
-          >
-            <a
-              @click="logout"
-              class="button is-outlined is-rounded has-text-primary"
-              >Log Out</a
-            >
-          </div>
-          <RouterLink v-else class="navbar-item" to="/login">
-            <a class="button is-outlined is-rounded has-text-primary">Log In</a>
-          </RouterLink>
         </div>
+        <RouterLink v-else class="navbar-item" to="/login">
+          <a class="button is-outlined is-rounded has-text-primary">Log In</a>
+        </RouterLink>
       </div>
     </div>
   </nav>

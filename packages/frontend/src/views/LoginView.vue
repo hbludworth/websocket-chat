@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import serverProxy from '@/serverProxy';
 import router from '@/router';
 import { RouterLink } from 'vue-router';
+import store from '@/store';
 
 const email = ref('');
 const password = ref('');
 
 const loading = ref(false);
 const errorMessage = ref('');
+
+const isAuthenticated = computed(() => store.getters.isAuthenticated);
 
 const formComplete = computed(() => {
   if (!email.value || !password.value) {
@@ -35,7 +38,11 @@ const login = async () => {
   try {
     loading.value = true;
     await serverProxy.login(email.value, password.value);
-    router.push('/');
+    watch(isAuthenticated, (isAuthenticated) => {
+      if (isAuthenticated) {
+        router.push('/chats');
+      }
+    });
   } catch (err) {
     const errorCode = (err as any).code;
     if (

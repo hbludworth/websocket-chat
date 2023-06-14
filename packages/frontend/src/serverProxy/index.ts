@@ -5,6 +5,7 @@ import register from './routes/register';
 import reset_password from './routes/reset_password';
 import users from './routes/users';
 import threads from './routes/threads';
+import messages from './routes/messages';
 
 const serverProxy = {
   ...login,
@@ -14,6 +15,7 @@ const serverProxy = {
   ...reset_password,
   ...users,
   ...threads,
+  ...messages,
 };
 
 export default serverProxy;

@@ -7,6 +7,13 @@ async function getUser(uuid: string): Promise<User> {
   return data;
 }
 
+async function getUserByEmail(email: string): Promise<User> {
+  const { data }: { data: User } = await axios.get(`/users/email/${email}`);
+
+  return data;
+}
+
 export default {
   getUser,
+  getUserByEmail,
 };
