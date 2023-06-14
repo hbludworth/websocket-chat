@@ -6,6 +6,7 @@ import LoadingScreen from './LoadingScreen.vue';
 import router from './router';
 import store from './store';
 import serverProxy from './serverProxy';
+import createWebsocket from './websocket';
 
 let app: AppType<Element>;
 let appLoaded = false;
@@ -26,16 +27,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
       store.setUser(user);
 
-      const socketProtocol =
-        window.location.protocol === 'https:' ? 'wss' : 'ws';
-      const socketHost =
-        process.env.NODE_ENV === 'development' ? 'localhost:8081' : '';
-      const token = store.getters.idToken;
-      const socket = new WebSocket(
-        `${socketProtocol}://${socketHost}/${token}`
-      );
-
-      store.setSocket(socket);
+      createWebsocket();
     } catch (err) {
       console.error('Error initializing site', err);
     }
