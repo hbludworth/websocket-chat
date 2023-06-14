@@ -1,4 +1,4 @@
-import { User, UpdateProfilePayload } from 'types';
+import { User } from 'types';
 import mongodb from '@/connection';
 
 class UserDao {

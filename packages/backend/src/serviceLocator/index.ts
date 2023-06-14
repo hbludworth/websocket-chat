@@ -1,9 +1,13 @@
 import UserDao from '@/daos/UserDao';
+import ThreadDao from '@/daos/ThreadDao';
+import MessageDao from '@/daos/MessageDao';
 
 const instances: { [key: string]: any } = {};
 
 export type ServiceTypes = {
   UserDao: typeof UserDao;
+  ThreadDao: typeof ThreadDao;
+  MessageDao: typeof MessageDao;
 };
 
 export default {

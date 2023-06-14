@@ -1,5 +1,5 @@
 import { Server } from 'http';
-import { User } from 'types';
+import { User, WebSocketPayload } from 'types';
 import { WebSocketServer, WebSocket } from 'ws';
 import firebase from '@/firebase';
 import sl from '@/serviceLocator';
@@ -27,10 +27,13 @@ export default class WebSocketStarter {
 
     // Handle connection event
     wss.on('connection', async (ws, req) => {
+      const UserDao = sl.get('UserDao');
+      const ThreadDao = sl.get('ThreadDao');
+      const MessageDao = sl.get('MessageDao');
+
       // Authenticate user
       let user: User | null;
       try {
-        const UserDao = sl.get('UserDao');
         const idToken = req.headers.authorization;
 
         if (!idToken) {
@@ -75,9 +78,66 @@ export default class WebSocketStarter {
       });
 
       // Handle messages
-      ws.on('message', (data) => {
-        console.log('Received message:');
-        console.log(data.toString());
+      ws.on('message', async (data) => {
+        const message: WebSocketPayload = JSON.parse(data.toString());
+
+        switch (message.type) {
+          case 'newThread': {
+            const body = message.body;
+
+            await ThreadDao.createThread(
+              body.uuid,
+              body.userUuid1,
+              body.userUuid2
+            );
+
+            const startingMessage = body.messages[0];
+
+            await MessageDao.createMessage(
+              startingMessage.uuid,
+              startingMessage.threadUuid,
+              startingMessage.userUuid,
+              startingMessage.content,
+              startingMessage.createdOn
+            );
+
+            connections.forEach((c) => {
+              if (
+                (c.userUuid === body.userUuid1 ||
+                  c.userUuid === body.userUuid2) &&
+                c.userUuid !== user?.uuid
+              ) {
+                c.ws.send(data);
+              }
+            });
+            break;
+          }
+          case 'newMessage': {
+            const body = message.body;
+
+            await MessageDao.createMessage(
+              body.uuid,
+              body.threadUuid,
+              body.userUuid,
+              body.content,
+              body.createdOn
+            );
+
+            const usersOfThread = await ThreadDao.getUsersOfThread(
+              body.threadUuid
+            );
+
+            connections.forEach((c) => {
+              if (
+                c.userUuid !== user?.uuid &&
+                usersOfThread.includes(c.userUuid)
+              ) {
+                c.ws.send(data);
+              }
+            });
+            break;
+          }
+        }
       });
     });
 
