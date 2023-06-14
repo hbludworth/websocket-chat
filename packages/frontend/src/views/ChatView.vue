@@ -158,7 +158,7 @@ watch(selectedThread, async () => {
           </div>
         </div>
 
-        <div class="threads-section">
+        <div class="threads-section" v-if="threads.length > 0">
           <div
             class="box mb-2 thread-box"
             :class="{
