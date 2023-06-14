@@ -18,7 +18,16 @@
 
       <div class="navbar-menu" :class="{ 'is-active': menuIsActive }">
         <div class="navbar-end">
-          <RouterLink v-if="isAuthenticated" class="navbar-item" to="/profile"
+          <RouterLink
+            v-if="isAuthenticated"
+            class="navbar-item mx-2"
+            to="/chats"
+            >Chats</RouterLink
+          >
+          <RouterLink
+            v-if="isAuthenticated"
+            class="navbar-item mx-2"
+            to="/profile"
             >Profile</RouterLink
           >
           <div

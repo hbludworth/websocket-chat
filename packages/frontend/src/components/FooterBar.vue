@@ -10,7 +10,7 @@
           <p class="mt-4">
             <span class="icon mx-4">
               <a
-                href="https://github.com/hbludworth/firebase-template"
+                href="https://github.com/hbludworth/websocket-chat"
                 target="_blank"
                 class="mdi mdi-github mdi-36px has-text-white"
               ></a>
@@ -23,7 +23,7 @@
               ></a>
             </span>
           </p>
-          <p class="mt-6">Template created by Harrison Bludworth.</p>
+          <p class="mt-6">Made by Harrison Bludworth. © 2023.</p>
           <p class="mt-5 is-size-7">
             Built with Vue, Node.js, MongoDB, Express, Bulma, and TypeScript.
           </p>

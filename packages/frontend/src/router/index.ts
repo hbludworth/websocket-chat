@@ -12,6 +12,12 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/chats',
+      name: 'chats',
+      component: () => import('../views/ChatView.vue'),
+      beforeEnter: authenticatedGuard,
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue'),

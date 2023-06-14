@@ -12,4 +12,4 @@ const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 
 const client = new MongoClient(url);
 
-export default client.db('FirebaseTemplate');
+export default client.db('WebSocketChat');
