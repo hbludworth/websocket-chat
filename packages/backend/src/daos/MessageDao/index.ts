@@ -9,7 +9,8 @@ class MessageDao {
       .toArray();
 
     return messages.sort(
-      (a, b) => a.createdOn.getTime() - b.createdOn.getTime()
+      (a, b) =>
+        new Date(a.createdOn).getTime() - new Date(b.createdOn).getTime()
     );
   }
 
