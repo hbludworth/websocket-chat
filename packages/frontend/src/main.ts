@@ -25,6 +25,17 @@ firebase.auth().onAuthStateChanged(async (user) => {
       const user = await serverProxy.getUser(currentUser.uid);
 
       store.setUser(user);
+
+      const socketProtocol =
+        window.location.protocol === 'https:' ? 'wss' : 'ws';
+      const socketHost =
+        process.env.NODE_ENV === 'development' ? 'localhost:8081' : '';
+      const token = store.getters.idToken;
+      const socket = new WebSocket(
+        `${socketProtocol}://${socketHost}/${token}`
+      );
+
+      store.setSocket(socket);
     } catch (err) {
       console.error('Error initializing site', err);
     }
@@ -33,6 +44,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
   if (!appLoaded) {
     appLoaded = true;
 
+    app.unmount();
     app = createApp(App);
     app.use(router);
     app.mount('#app');

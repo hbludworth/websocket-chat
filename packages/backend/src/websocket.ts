@@ -4,6 +4,9 @@ import { WebSocketServer, WebSocket } from 'ws';
 import firebase from '@/firebase';
 import sl from '@/serviceLocator';
 
+// FIXME instead of using the server to relay messages, I'd like to simply send messages to other clients when API routes are called.
+// Server won't need to receive any ws messages, just send them out.
+
 interface WebSocketConnection {
   userUuid: string;
   ws: WebSocket;
@@ -34,7 +37,7 @@ export default class WebSocketStarter {
       // Authenticate user
       let user: User | null;
       try {
-        const idToken = req.headers.authorization;
+        const idToken = req.url?.substring(1);
 
         if (!idToken) {
           throw new Error(

@@ -4,11 +4,13 @@ import { type User } from 'types';
 export interface State {
   user: User | null;
   idToken: string | null;
+  socket: WebSocket | null;
 }
 
 const state: State = reactive({
   user: null,
   idToken: null,
+  socket: null,
 });
 
 export default {
@@ -18,9 +20,13 @@ export default {
   setToken: (token: string) => {
     state.idToken = token;
   },
+  setSocket: (socket: WebSocket) => {
+    state.socket = socket;
+  },
   logout: () => {
     state.user = null;
     state.idToken = null;
+    state.socket = null;
   },
   getters: {
     get isAuthenticated() {
@@ -31,6 +37,9 @@ export default {
     },
     get idToken() {
       return state.idToken;
+    },
+    get socket() {
+      return state.socket;
     },
   },
 };
