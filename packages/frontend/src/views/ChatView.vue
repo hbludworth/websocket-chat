@@ -8,7 +8,7 @@ import NewThreadDialog from '@/components/NewThreadDialog.vue';
 import MessagesSection from '@/components/MessagesSection.vue';
 
 const threads = ref<Thread[]>([]);
-const socket = computed(() => store.getters.socket!);
+const socket = computed(() => store.getters.socket);
 const currentUser = computed(() => store.getters.user!);
 const loading = ref(false);
 
@@ -29,7 +29,9 @@ onMounted(async () => {
       selectedThread.value = threads.value[0];
     }
 
-    setupSocketListener();
+    if (socket.value) {
+      setupSocketListener();
+    }
   } catch (err) {
     console.error(err);
   } finally {
@@ -40,8 +42,15 @@ onMounted(async () => {
   }
 });
 
+watch(socket, () => {
+  if (socket.value) {
+    setupSocketListener();
+  }
+});
+
 const setupSocketListener = () => {
-  socket.value.onmessage = async (event) => {
+  console.log('Set up socket listener');
+  socket.value!.onmessage = async (event) => {
     const message: WebSocketPayload = JSON.parse(await event.data);
 
     switch (message.type) {

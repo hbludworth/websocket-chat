@@ -21,19 +21,23 @@ const createWebsocket = () => {
       return;
     }
 
+    console.log('Connecting...');
     socket = new WebSocket(`${socketProtocol}://${socketHost}/${token}`);
 
     socket.onopen = () => {
+      console.log('Connected!');
       numAttempts = 0;
       clearInterval(interval);
       store.setSocket(socket);
 
       socket.onclose = () => {
+        console.log('Connection lost');
         interval = setInterval(resetSocket, 1000);
       };
     };
   };
 
+  resetSocket();
   let interval = setInterval(resetSocket, 1000);
 };
 
