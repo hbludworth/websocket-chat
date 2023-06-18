@@ -3,7 +3,7 @@ import store from '@/store';
 const createWebsocket = () => {
   const socketProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
   const socketHost =
-    process.env.NODE_ENV === 'development' ? 'localhost:8081' : '';
+    process.env.NODE_ENV === 'development' ? 'localhost:8082' : '';
   const token = store.getters.idToken;
 
   let socket: WebSocket;
@@ -21,17 +21,14 @@ const createWebsocket = () => {
       return;
     }
 
-    console.log('Connecting...');
     socket = new WebSocket(`${socketProtocol}://${socketHost}/${token}`);
 
     socket.onopen = () => {
-      console.log('Connected!');
       numAttempts = 0;
       clearInterval(interval);
       store.setSocket(socket);
 
       socket.onclose = () => {
-        console.log('Connection lost');
         interval = setInterval(resetSocket, 1000);
       };
     };

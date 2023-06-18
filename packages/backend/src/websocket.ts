@@ -97,12 +97,6 @@ export default class WebSocketStarter {
       ws.on('pong', () => {
         connection.alive = true;
       });
-
-      // Handle messages
-      ws.on('message', async (data) => {
-        const message = JSON.parse(data.toString());
-        console.log(message);
-      });
     });
 
     // Keep connections alive

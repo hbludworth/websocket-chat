@@ -49,7 +49,6 @@ watch(socket, () => {
 });
 
 const setupSocketListener = () => {
-  console.log('Set up socket listener');
   socket.value!.onmessage = async (event) => {
     const message: WebSocketPayload = JSON.parse(await event.data);
 

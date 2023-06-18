@@ -1,10 +1,9 @@
 import axios from 'axios';
 import store from '@/store';
 import firebase from '@/firebase';
-import router from '@/router';
 
 const host =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : '';
+  process.env.NODE_ENV === 'development' ? 'http://localhost:8082' : '';
 
 const axiosInstance = axios.create({
   baseURL: `${host}/api`,

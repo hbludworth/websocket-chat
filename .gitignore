@@ -134,6 +134,8 @@ build
 dist
 .vscode
 build.zip
+chat_build
+chat_build.zip
 
 #Vue
 # Logs
