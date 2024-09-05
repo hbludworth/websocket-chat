@@ -3,7 +3,7 @@ import store from '@/store';
 import firebase from '@/firebase';
 
 const host =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:8082' : '';
+  process.env.NODE_ENV === 'development' ? 'http://localhost:8083' : '';
 
 const axiosInstance = axios.create({
   baseURL: `${host}/api`,

@@ -9,11 +9,12 @@
     ]
   },
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start:dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "build": "./build.sh",
     "server": "yarn workspace backend dev",
     "client": "yarn workspace frontend dev",
-    "zip": "./zip.sh"
+    "zip": "./zip.sh",
+    "start": "yarn install && yarn build && yarn workspace backend start"
   },
   "dependencies": {
     "concurrently": "^8.1.0"
