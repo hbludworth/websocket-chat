@@ -3,7 +3,9 @@ import store from '@/store';
 const createWebsocket = () => {
   const socketProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
   const socketHost =
-    process.env.NODE_ENV === 'development' ? 'localhost:8083' : '';
+    process.env.NODE_ENV === 'development'
+      ? 'localhost:8083'
+      : 'chat.harrisonbludworth.com';
   const token = store.getters.idToken;
 
   let socket: WebSocket;
